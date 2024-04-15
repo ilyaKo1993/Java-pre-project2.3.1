@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h1>USERS TABLE</h1>
+
+
+<th:block th:each="msg : ${listUser}">
+    <table>
+        <td>
+            <form th:action="@{/edit}">
+                <button type="submit" th:name="id" th:value="${msg.id}">Edit</button>
+            </form>
+        </td>
+        <td>
+            <form method="post" th:action="@{/remove}">
+                <button type="submit" th:name="id" th:value="${msg.id}">Delete</button>
+            </form>
+        </td>
+        <tr>
+            <h4></h4>
+            <td>ID</td>
+            <th th:text="${msg.getId()}"></th>
+        </tr>
+        <tr>
+            <td>Имя</td>
+            <th th:text="${msg.getName()}">Name</th>
+        </tr>
+        <tr>
+            <td>Фамилия</td>
+            <th th:text="${msg.getLastName()}">LastName</th>
+        </tr>
+
+    </table>
+</th:block>
+<br/>
+<br/>
+
+
+<h3> Add User</h3>
+
+<form action="#" th:action="@{/user/add}" th:object="${user}"
+      method="post">
+    <div class="row">
+        <div class="form-group col-md-8">
+            <label for="id" class="col-form-label">Имя</label>
+            <input type="text" th:field="*{name}" class="form-control"
+                   id="firstName" placeholder="Name"/>
+        </div>
+        <div class="form-group col-md-8">
+            <label for="id" class="col-form-label">Фамилия</label>
+            <input type="text" th:field="*{lastName}" class="form-control"
+                   id="lastName" placeholder="LastName"/>
+        </div>
+        <div class="col-md-6">
+            <input type="submit" class="btn btn-primary" value=" Submit ">
+        </div>
+
+        <input type="hidden" id="id" th:field="*{id}">
+
+    </div>
+</form>
+
+
+</body>
+</html>
